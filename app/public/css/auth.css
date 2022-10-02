@@ -1,0 +1,19 @@
+body{
+    background: linear-gradient(50deg, #021317 50%, #353131);
+}
+
+#card-login{
+    width: 400px;
+    height: 260px;
+    
+    background-color: rgba(255, 255, 255, 0.334);
+    color: white;
+}
+
+.container{
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+
+    <link rel="stylesheet" href="css/register.css">
+    <script src="./js/imageFunction.js" defer></script>
+
+</head>
+<body>
+  <%- include('../layout/navbar') %>
+
+    <div class="" id="formCreate">
+        <h1>Criar Serviço</h1>
+
+        <div class="card col-8" id="card">
+      
+              <img class="card-img-top" id="image" src="" alt="imagem de capa para o tipo de serviço">
+             
+            <div class="card-body" id="card-corpo">
+              <h5 class="card-title" id="card-titulo"></h5>
+              <p class="text-muted" id="card-subtitulo"></p>
+            </div>
+              
+            <div class="card-footer">
+              <p>Estada inferior a 90 dias</p>
+            </div>
+        </div>
+
+        <form action="/" id="form-dados" class="col-8" method="post">
+            <div class="form-group opsao namePreco">
+                <label for="nome">Nome</label>
+                <select name="nome" id="nome" class="form-control">
+                    <option value="Visto de Turismo">Visto de Turismo (Estada inferior a 90 dia) </option>
+                    <option value="Visto de Saúde">Visto de Saúde (Estada inferior a 90 dia) </option>
+                    <option value="Visto de Visita Familiar">Visto de Visita Familiar (Estada inferior a 90 dia) </option>
+                    <option value="Visto de Ajuda Humanitária">Visto de Ajuda Humanitária (Estada inferior a 90 dia) </option>
+                    <option value="Visto de Trabalho">Visto de Trabalho (Estada inferior a 90 dia) </option>
+                    <option value="Visto de Formação Profissional">Visto de Formação Profissional (Estada inferior a 90 dia) </option>
+                    <option value="Visto de Formação">Visto de Formação</option>
+                </select>
+            </div>
+
+            <div class="form-group opsao namePreco">
+                <label for="preco">Preço: </label>
+                <input type="text" name="preco" id="preco" class="form-control" placeholder="Preço do Serviço">
+            </div>
+
+            <a href="#" id="btn1" onclick="next('.selecao', '#btn1', '.botao')" class="btn btn-primary my-2 large btnl">proximo</a>
+
+
+            <div class="form-group opsao selecao">
+                <label for="microServicos">Micro-Serviços:</label>
+                <p class="text-muted showServico"></p>
+                <div class="form-group list">
+                    <input type="checkbox" name="microServicos" value = " Agendamento"> Agendamento
+                </div>
+                <div class="form-group list">
+                    <input type="checkbox" name="microServicos" value = " Reserva de Vôo"> Reserva de Vôo
+                </div>
+                <div class="form-group list">
+                    <input type="checkbox" name="microServicos" value = " Reserva de Hotel"> Reserva de Hotel
+                </div>
+                <div class="form-group list">
+                    <input type="checkbox" name="microServicos" value = " formulário"> formulário
+                </div>
+                <div class="form-group list">
+                    <input type="checkbox" name="microServicos" value = " Declarações & Termos"> Declarações & Termos
+                </div>
+                <div class="form-group list">
+                    <input type="checkbox" name="microServicos" value = " Macação de Consulta Médica"> Macação de Consulta Médica
+                </div>
+                <div class="form-group list">
+                    <input type="checkbox" name="microServicos" value = " Inscrição em Escola"> Inscrição em Escola
+                </div>
+            </div>
+
+            <div class="form-group opsao selecao">
+                <label for="requisitos">Requisitos Necessários:</label>
+                <p class="text-muted showReq"></p>
+                <div class="form-group list">
+                    <input type="checkbox" name="requisitos" value = " Bilhete de Identidade"> Bilhete de Identidade
+                </div>
+                <div class="form-group list">
+                    <input type="checkbox" name="requisitos" value = " Passaport válido por pelo menos três meses"> Passaport válido por pelo menos três meses
+                </div>
+                <div class="form-group list">
+                    <input type="checkbox" name="requisitos" value = " Comprovativo de Alojamento"> Comprovativo de Alojamento
+                </div>
+                <div class="form-group list">
+                    <input type="checkbox" name="requisitos" value = " Comprovativo de Subsistência"> Comprovativo de Subsistência
+                </div>
+            </div>
+
+                <div id="botao" class="form-group opsao botao">
+                    <input type="submit" value="Cadastrar"  class="btn btn-primary large m-4" onclick="next('', '#btn2', '')">
+                </div>
+            </form>
+
+            <form id="form-img" method="post" class="col-8" enctype="multipart/form-data">
+                    
+                <div class="form-group opsao image">
+                    <label for="file">Imagem</label>
+                    <input type="file" name="file" id="imageInput" class="form-control">
+                </div>
+
+                <div id="btn3" class="form-group opsao btn3">
+                    <input type="submit" value="Salvar Imagem" class="btn btn-primary large m-4" onclick="getId()">
+                </div>
+
+            </form>
+
+            <div class="card-footer">
+                
+                <a href="/" class="text-muted">voltar ao Início</a>
+            </div>
+    </div>
+
+
+    <script type="text/javascript">
+        var servico = null
+        
+        function getList(listName) {
+            const ln= document.getElementsByName(listName)
+            const list = []
+            
+            ln.forEach(micro => {
+                if(micro.checked == true){
+                    list.push(micro.defaultValue)
+                }
+            })
+            return list.toLocaleString()
+        }
+
+        function next(bloco, botao, botaoNext){
+
+            if(botao == '#btn1'){
+                const name = $('#nome').val()
+                const valor = $('#preco').val() * 1
+    
+    
+                const preco = valor.toLocaleString('pt-AO', {style: 'currency', currency: 'AOA'})
+                
+                $('#card-titulo').text(name)
+                $('#card-subtitulo').text(preco)
+
+                $('#card').css({
+                    display: 'flex',
+                })
+
+                $('.namePreco').css({
+                    display: 'none',
+                })
+            }
+            
+            
+            if(botao == '#btn2'){
+                getList('requisitos')
+                $('.list').css({
+                    display: 'none',
+                })
+                const requisitos = getList('requisitos')
+                const microServicos = getList('microServicos')
+                
+                $('.showServico').text(microServicos)
+                $('.showReq').text(requisitos)
+            }
+
+            $(botao).css({
+                display: 'none',
+            })
+            
+            $(bloco).css({
+                display: 'block',
+            })
+            
+            $(botaoNext).css({
+                display: 'block',
+            })
+            
+            setTimeout(() => {
+                const form = $(bloco).css({
+                    transition: 'opacity 2s',
+                    opacity: '1',
+                })
+
+                $(botaoNext).css({
+                    transition: 'opacity 2s',
+                    opacity: '1',
+                })
+            }, 200);
+
+        }
+
+        $('#form-dados').submit(function(event) {
+            event.preventDefault()
+
+            
+            const valor = $('input[name=preco]').val()
+    
+            
+            const name = $('#nome').val()
+            const preco = valor.toLocaleString('pt-AO', {style: 'currency', currency: 'AOA'})
+            const microServicos =  getList('microServicos')
+            const requisitos = getList('requisitos')
+
+            $.post('/', {
+                name,
+                preco,
+                microServicos,
+                requisitos,
+            } ).then(res => {
+                servico = res
+                console.log(servico) 
+                next('.image', '.botao', '#btn3')
+            })
+        })
+        function getId(){
+            const form = document.querySelector('#form-img')
+            console.log(servico)
+
+            form.setAttribute('action', '/sendImage/' + servico.id)
+        }
+
+    </script>
+
+    <script src="./assets/dist/js/bootstrap.min.js"></script>
+    <script src="./assets/dist/jquery/dist/jquery.min.js"></script>
+
+</body>
+</html>

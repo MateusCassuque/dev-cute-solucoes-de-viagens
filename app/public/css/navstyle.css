@@ -1,0 +1,32 @@
+#nav{
+    background-color: #16a;
+    text-align: center;
+}
+
+#nav a{
+    color: #FFF;
+    font-size: large;
+}
+
+#nav li a:hover{
+    color: #000;
+    background-color: #fff;
+    border-radius: 10px;
+
+    transition: all .6s;
+}
+
+@media (min-width: 720px) {    
+    #nav #navbarTogglerDemo03 ul{
+        margin: 0 auto;
+    }
+}
+
+#nav #navbarTogglerDemo03 li{
+    margin: auto 5px;
+}
+
+
+#separador{
+    padding: 18px;
+}

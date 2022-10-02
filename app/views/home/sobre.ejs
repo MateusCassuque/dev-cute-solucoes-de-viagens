@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev-Cute Sobre</title>
+
+    <link rel="stylesheet" href="../public/assets/dist/css/bootstrap.min.css">
+
+</head>
+<body>
+
+    <!--div class="container" id="containe">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+            <a href="#" class="navbar-brand">Dev-cute</a>
+               
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbar-links" aria-controls="#navbar-links" aria-expanded="false"
+                aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>                
+                 
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbar-links">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a href="#" class="nav-link">home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">contacto</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">sobre</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div-->
+
+    <!--codigo da divisão  de rows-->
+   
+    <div id="tabControll">
+        
+        <div class="row">
+            <main class="rounded">
+                <nav>
+                    <div class="nav nav-tabs mb-2" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                        type="button" role="tab" aria-controls="nav-home" aria-selected="true">
+                        Titulo 1
+                        </button>
+    
+                        <button class = 'nav-link' id='nav-tab1-tab' data-bs-toggle='tab' data-bs-target='#nav-tab1' type='button' role='tab'
+                        aria-controls='nav-tab1' aria-selected='false'>
+                            Titulo 2
+                        </button>
+                    </div>
+                </nav>
+            </main>
+        </div>
+        
+        <!--codigo da publicadades gerais e pedidas-->
+        <div class="tab-content" id="nav-tabContent">
+            <!--primeira parte-->
+            <h2 class = "border-bottom">Nossas Escolas</h2>
+            
+            <div class="tab-pane show active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                
+                <div class="row">
+                    <div class="col-10">
+                        <div class="card">
+                            <img src="/img/escolas/{{ $escola->image }}" alt="" class="card-img-top img-fluid">
+                            
+                            <div class="card-body">
+                                <h4 class="card-title">TITULO DO CARD</h4>
+                                
+                                <h6 class="card-subtitle mb-2 text-muted">Card-subtitulo</h6>
+                                
+                                <div class="card-action">
+                                    <a href="./index.html" class="card-link btn btn-dark btn-lg">Saber Mais</a>
+                                </div>
+                            </div>
+                            
+                            <div class="card-footer text-muted">
+                                subtitulo do card <br>
+                                Entra em contacto conosco. &nbsp; &copy; 2021
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Parte do painel de pesquisas-->
+            
+            <div class="tab-pane fade" id ="nav-tab1" role="tabpanel" aria-labelledby ="nav-tab1-tab">
+                
+                <div class="row">
+                    <div class="col-10">
+                        <div class="card">
+                            <img src="/img/escolas/{{ $escola->image }}" alt="foto do card">
+                            <div class="card-body">
+                                <h5 class="card-title"> Titulo do card</h5>
+                                <p class="card-date"> Escola: Comparticipada</p>
+                                <a href="./sobre.html" class="btn btn-dark">Saber mais</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+
+    </div>
+    
+    
+    <script src="../public/assets/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+                                

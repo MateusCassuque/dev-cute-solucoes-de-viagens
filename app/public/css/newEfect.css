@@ -1,0 +1,117 @@
+#slidTitulo{
+    position: relative;
+    box-shadow: 0px 0.3px .5px 0px rgba(255, 255, 255, 0.469);
+    width: 380px;
+    margin: 0 auto 150px auto;
+    top: 100px;
+}
+h2{
+    padding: 20px;
+    width: 100%;
+    font-size: 35px;
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+}
+
+.mask{
+    height: 70px;
+    position: relative;
+    overflow: hidden;
+    margin-top: var(--offset);
+}
+
+.mask strong{
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    top: 200px;
+    padding-bottom: var(--offset);
+    
+    background-size: 100% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    background-repeat: no-repeat;
+}
+
+.mask strong:nth-child(1){
+    background-image: linear-gradient(45deg, #0ecffe 50%, #b31304);
+}
+.mask strong:nth-child(2){
+    background-image: linear-gradient(45deg, #18e198 50%, #034e24);
+}
+.mask strong:nth-child(3){
+    background-image: linear-gradient(45deg, #8a7cfb 50%, #5a23ad);
+}
+
+.mask strong:nth-child(4){
+    background-image: linear-gradient(45deg, #8a7cfb 50%, #6e44ad);
+}
+
+
+.mask strong[data-show]{
+    top: 20px;
+    transition: all .4s;
+}
+
+/*Formatação do tamanho da fonte para os telefones!*/
+@media(max-width: 720px){
+    #tabControll *{
+        font-size: 12px;
+    }
+
+    .mask strong{
+        font-size: 20px;
+    }
+    
+}
+/*---------------------------------------------------*/
+
+
+/*Stilização do nav bar*/
+.nav-link{
+    text-align: justify;
+    text-indent: 20px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    background-color: rgba(255, 255, 255, 0.091);
+
+}
+.nav-link:hover{
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.navbar-toggler{
+   margin-right: 10px;
+}
+
+.conteudo{
+    margin-bottom: 10px;
+    text-indent: 25px;
+    text-align: center;
+}
+
+
+/*Formatação única para os PCs*/
+@media(min-width: 720px){
+
+    
+    #slidTitulo{
+        width: 720px;
+    }
+
+    .nav-link:hover{
+        background-color: rgba(255, 255, 255, 0.091);
+
+    }
+    .nav-link{
+        background-color: rgba(255, 255, 255, 0);
+        text-indent: 0;
+        margin: 4px;
+
+    }
+
+    .navbar-nav{
+        margin-right: 20px;
+    }
+}

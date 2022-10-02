@@ -1,0 +1,81 @@
+#carouselExampleIndicators .carousel-item .legenda{
+    position: absolute;
+    top: 20%;
+
+    color: #FFF;
+    background-color: rgba(0, 0, 0, 0.338);
+    
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 15px;
+    text-transform: capitalize;
+}
+
+.card{
+    width: max-content;
+}
+
+#servicos,
+#subServicos {
+    margin: 4px;
+
+}
+
+#subServicos .card{
+    max-width: 25rem;
+}
+
+/*Formatação do tamanho da fonte para os telefones!*/
+@media(max-width: 720px){
+    *{
+        font-size: 14px;
+    }
+ }
+/*  */
+
+
+/*Formatação única para os PCs*/
+@media(min-width: 720px){
+    #carouselExampleIndicators .carousel-item{ 
+        height: 650px;
+        position: relative;
+    }
+    
+    #carouselExampleIndicators .carousel-item img{
+        height: 100%;
+    }
+
+    #subServicos{
+        width: 100%;
+        margin: auto;
+    }
+    
+    #subServicos .card{
+        max-width: 25rem;
+        margin: 20px;
+    }
+
+    #carouselExampleIndicators .carousel-item .legenda{
+        position: absolute;
+        top: 40%;
+        
+        padding: 40px;
+    
+        font-size: 30px;
+    }
+}
+
+#servicos .card{
+    border: none;
+}
+
+#servicos .card .card-body{
+    border-bottom: solid 0.1px rgba(0, 0, 0, 0.286);
+}
+
+#servicos .card .showServico{
+    border-left: solid 3px rgb(212, 160, 4);
+    padding: 4px;
+    margin: 4px 0;    
+}

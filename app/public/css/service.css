@@ -1,0 +1,31 @@
+#principal .card{
+    border: none;
+    margin: 0 auto;
+}
+
+#principal .card .card-body{
+    border-bottom: solid 0.1px rgba(0, 0, 0, 0.286);
+}
+
+#card-form .obrigatorio,
+#aviso{
+    color: red;
+    text-align: end;
+    margin: 10px;
+}
+
+#card-form{
+    opacity: 0;
+    display: none;
+}
+
+#card-form p{
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+@media(min-width: 720px){
+    #card-form p{
+        font-size: 16px;
+    }
+}

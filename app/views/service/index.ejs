@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSV - <%=servico.name %></title>
+
+    <link rel="stylesheet" href="/css/service.css">
+    
+</head>
+<body>
+  <%- include('../layout/navbar') %>
+
+  <div class="row col-12 col-md-11 offset-md-1" id="principal">
+    <% if(servico){ %>
+      <div class="card col-md-6 m-2">
+          <% if(servico.imagem){ %>
+        <img class="card-img-top" src="/img/services/<%=servico.imagem%>" alt="<%=servico.name %>">
+      <% } else{ %>    
+        <img class="card-img-top" src="/img/Slid/image_downloader_1661001390616.jpg" alt="Turismo">
+      <% } %>
+          
+          <div class="card-body">
+            <h3 class="card-title"> <%=servico.name %> </h3>
+            <p class="card-subtitle mb-2">Estada inferior a 90 dia</p>
+          
+            <h5 class="card-header">Cuidamos de:</h5>
+            <ul>
+              <% servico.microServicos.forEach(ms => { %>
+                  <li><%=ms %></li>
+              <% }) %>
+            </ul>
+
+            <p class="reservar">Cuidamos de Tudo por apenas <strong class="text-success"> <%=servico.preco %> </strong> </p>
+            <a onclick="reservar()" class="btn btn-success reservar">Reservar</a>
+          </div>
+
+          <div class="card-footer" id="footer-card">
+            <p class="text-muted">para mais informações conatcte: +244 949 143 902 | <br class="d-md-none">
+              <span class="text-success">Whatsapp: +244 952 494 542</span>
+            </p>
+          </div>
+    </div>
+    <% } %>
+    <div class="card col-md-5 m-2" id="card-form">
+
+      <div class="card-header">
+        <h5>Precisamos de:</h5>
+      </div>
+
+      <span id="aviso"> * (Obrigatório) </span>
+      
+      <p class="alert alert-info" role="alert">Preencha o formulário para enviar a inscrição</p>
+      
+      <div class="card-body">
+        <form action="/processo/<%=servico.id %>" method="post">
+          <div class="row">
+            
+            <div class="col-6 form-group">
+              <label for="name">Nome:</label>
+              <input type="text" name="name" id="name" placeholder="nome proprio" class="form-control"><span class="obrigatorio">*</span>
+            </div>
+            
+            <div class="col-6 form-group">
+              <label for="apelido">Apelido:</label>
+              <input type="text" name="apelido" id="apelido" placeholder="Apelido" class="form-control"> <span class="obrigatorio">*</span>
+            </div>
+
+            <label for="name">Contacto:</label>
+            
+            <div class="col-md-6 form-group">
+              <input type="text" name="telefone" id="telefone" placeholder="telefone: +244 999 999 999" class="form-control"><span class="obrigatorio">*</span>
+            </div>
+
+            <div class="form-group col-md-6">
+              <input type="text" name="email" id="email" placeholder="Email: exemplo@gmail.com" class="form-control"><span class="obrigatorio">*</span>
+            </div>
+
+            <div class="col-md-6 form-group">
+              <label for="bi">Nº BI:</label>
+              <input type="text" name="bi" id="bi" class="form-control" placeholder="Nº de Identificação"> <span class="obrigatorio">*</span>
+            </div>
+            
+            <div class="col-md-6 form-group">
+              <label for="passaport">Nº Passaport:</label>
+              <input type="text" name="passaport" id="passaport" class="form-control" placeholder="Nº Passaporte"> <span class="obrigatorio">*</span>
+            </div> 
+            
+            <div class="col-6 form-group">
+              <label for="nascimento">Data de Nascimento:</label>
+              <input type="date" name="nascimento" id="nascimento" class="form-control">
+            </div>
+            
+            <div class="col-6 form-group">
+              <label for="nascimento">Expiração do Passaport</label>
+              <input type="date" name="passaportDate" id="nascimento" class="form-control">
+            </div>
+
+            <input type="submit" value="Enviar" class="my-4 btn btn-primary">
+            
+          </div>
+        </form>
+      </div>
+      
+      <div class="card-footer">
+        <p class="text-muted">para mais informações conatcte: +244 949 143 902 | <br class="d-md-none">
+          <span class="text-success">Whatsapp: +244 952 494 542</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function reservar(){
+      const form = $('#card-form').css({
+        display: 'block',
+      })
+
+      setTimeout(() => {
+        const form = $('#card-form').css({
+          transition: 'opacity 2s',
+          opacity: '1',
+        })
+      }, 500);
+
+      const b = $('.reservar').css({
+        display: 'none'
+      })
+      const footer = $('#footer-card').css({
+        visibility: 'hidden',
+      })
+    }
+
+  </script>
+      <script src="/assets/dist/js/bootstrap.min.js"></script>
+      <script src="/assets/dist/jquery/dist/jquery.min.js"></script>
+</body>
+</html>

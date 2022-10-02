@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="/css/newEfect.css">
+    <script src="/js/index.js"></script>
+
+</head>
+<body>
+    <%- include('../layout/navbar') %>
+    <div id="slidTitulo">
+        <h2>
+            <b> Dev-Cute </b> <br><small><b>Soluções de Viagens</b></small> 
+            <div class="mask">
+                <strong data-show>A Solução para o teu negócio. </strong>
+                <strong>Dá um nivel a Mais no que você faz!</strong>
+                <strong>O Futuro chegou mais cedo!</strong>
+                <strong>Só acerta quem tenta!</strong>
+            </div>
+        </h2>
+    </div>
+    
+    <div id="tabControll" class="col-12">
+        <div class="">
+            <main>
+                <nav>
+                    <div class="nav nav-tabs mb-2" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                        type="button" role="tab" aria-controls="nav-home" aria-selected="true">
+                            Serviços
+                        </button>
+                    
+                        <button class="nav-link" id="nav-tab1-tab" data-bs-toggle="tab" data-bs-target="#nav-tab1" type="button" role="tab" aria-controls="nav-tab1" aria-selected="false">
+                            Processos
+                        </button>
+                    </div>
+                </nav>
+            </main>
+            
+        
+            <div class="tab-content" id="nav-tabContent">
+            
+                <!--primeira parte-->
+                <div class="tab-pane show active m-2" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                    <a href="/register" class="btn btn-primary d-block my-4"> Criar Serviço </a>
+                    
+                    <table class="table table-hover table-primary" id="tabela">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Serviços</th>
+                                <th scope="col">Preço</th>
+                                <th scope="col">Acção</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% servicos.forEach(servico => { %>
+                            <tr>
+                                <th scope="row"><%=servico.id %></th>
+                                <td><%=servico.name %></td>
+                                <td><%=servico.preco %></td>
+                                <td>
+                                    <a href="/service/show/<%=servico.id%>" class="btn btn-primary">Ver</a>
+                            </tr>
+                            <% })%>
+                        </tbody>
+                    </table>
+                </div>
+            
+                <!--Segunda parte-->
+                
+                <div class="tab-pane fade" id ="nav-tab1" role="tabpanel" aria-labelledby ="nav-tab1-tab">
+                    
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Cliente</th>
+                                <th scope="col">Serviço</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Acção</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% processos.forEach(processo => { %>
+                            <tr>
+                                <th scope="row"><%=processo.id %></th>
+                                <td><%=processo.client.name %> <%=processo.client.apelido %></td>
+                                <td><%=processo.servico.name %></td>
+                                <td><%=processo.estado %></td>
+                                <td><a href="#" class="btn btn-primary">Ver</a></td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

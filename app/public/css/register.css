@@ -1,0 +1,50 @@
+#formCreate{
+    margin-top: 40px;
+    width: 100%;
+}
+
+#formCreate form {
+    margin: 0 auto;
+}
+
+#formCreate h1{
+    text-align: center;
+}
+
+#formCreate .opsao {
+    margin-top: 15px;
+}
+
+#formCreate .opsao label{
+    border-left: solid 3px rgb(212, 160, 4);
+    padding: 4px;
+    margin: 4px 0;
+}
+
+#formCreate .selecao,
+.image, #botao, #btn2, #btn3, #selecao{
+    opacity: 0;
+    display: none;
+}
+
+#formCreate .btnl{
+    display: block;
+}
+
+#formCreate #card{
+    margin: 15px auto;
+    display: none;
+    border: none;
+}
+
+#formCreate #card img{
+    display: none;
+}
+
+.quedrado{
+    border: solid 1px red;
+
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+}
