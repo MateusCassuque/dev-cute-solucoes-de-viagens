@@ -1,33 +1,39 @@
 const express = require('express')
+const path = require('path')
+
 const router = express.Router()
+const jsonCRUD = require('../../config/jsonCRUD')
 
-
-const User = require('../models/User')
-const Servico = require('../models/Servico')
-const Processo = require('../models/Processo')
-
-const servicos = require('../../config/jsons/services.json').reverse()
-const processos = require('../../config/jsons/processes.json').reverse()
-
-
-const user = require('../../config/jsons/users.json')
-
-const userAdmin = user[0]
+const sf = {
+    pathU: path.resolve(__dirname, '..', '..', 'config', 'jsons', 'users.json' ),
+    pathS: path.resolve(__dirname, '..', '..', 'config', 'jsons', 'services.json' ),
+    pathP: path.resolve(__dirname, '..', '..', 'config', 'jsons', 'processes.json' ),
+    encoding: 'utf-8'
+}
 
 router.get('/login', (req, res) => {
     res.render('auth')
 })
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     const {email, senha} = req.body
 
-    if((email === userAdmin.email) && (senha === userAdmin.senha)){
-        // req.session.userAdmin = userAdmin
-      res.redirect('/auth/dashboard')  
-    }else{
+    const users = await jsonCRUD.JSONRead(sf.pathU,sf.encoding).then(res => {
+        return res
+    })
+
+    const user = users.find(userAdmin => email === userAdmin.email && senha === userAdmin.senha )
+
+    if(!user){
         const message = 'Não autorizado!'
-        res.render('auth', {message})
+  
+        console.log(message)
+        res.status(400).render('auth', {message})
     }
+    
+    console.log(user)
+    // req.session.userAdmin = userAdmin
+    res.status(200).redirect('/auth/dashboard')  
 })
 
 router.get('/logout', (req, res) => {
@@ -35,13 +41,23 @@ router.get('/logout', (req, res) => {
     // res.redirect('/');
 })
 
-router.get('/dashboard', (req, res) => {
-
-    res.render('auth/dashboard', { userAdmin, servicos, processos})
-
+router.get('/dashboard', async (req, res) => {
+    try {
+        const processos = await jsonCRUD.JSONRead(sf.pathP,sf.encoding).then(res => {
+            return res
+        })
+        
+        const servicos = await jsonCRUD.JSONRead(sf.pathS,sf.encoding).then(res => {
+            return res
+        })
+        
+        res.status(200).render('auth/dashboard', {servicos, processos})
+    } catch (error) {
+        console.log(error)
+        res.status(400).send({Error: 'Algo deu errado!: ' + error})
+    }
 })
-
-
+    
 router.get('/show/:processId', (req, res) => {
     res.render('auth/showProcess')
 })

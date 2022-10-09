@@ -93,7 +93,7 @@
                                 <td><%=processo.client.name %> <%=processo.client.apelido %></td>
                                 <td><%=processo.servico.name %></td>
                                 <td><%=processo.estado %></td>
-                                <td><a href="#" class="btn btn-primary">Ver</a></td>
+                                <td><a href="/processo/show/<%=processo.id%>" class="btn btn-primary">Ver</a></td>
                             </tr>
                             <% }) %>
                         </tbody>

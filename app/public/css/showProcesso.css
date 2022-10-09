@@ -1,0 +1,16 @@
+.container #card{
+    border: none;
+    box-shadow: 0px 0px 25px 0px black;
+}
+
+.container #card .campo{
+  text-transform: capitalize;
+}
+
+.container #card .campo .valor{
+  font-weight: bold;
+}
+
+.container #card #form-edit{
+  display: none;
+}

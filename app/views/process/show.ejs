@@ -1,44 +1,113 @@
 <html>
 <head>
-    <title>DSV / SHOW -  </title>
-    <link rel="stylesheet" href="/css/showService.css">
+    <title>DSV / SHOW  -  </title>
+    <link rel="stylesheet" href="/css/showProcesso.css">
 </head>
 <body>
   <%- include('../layout/navbar') %>
+
     <div class="container">
         <div class="row col-12">
-            <% if(servico){ %>
+            <% if(processo.servico){ %>
                 <div class="card col-md-6 col-11 mx-auto my-4" id="card">
-                    <% if(servico.imagem){ %>
-                        <img class="card-img-top" src="/img/services/<%=servico.imagem%>" alt="<%=servico.name %>">
+                    <% if(processo.servico.imagem){ %>
+                        <img class="card-img-top" src="/img/services/<%=processo.servico.imagem%>" alt="<%=processo.servico.name %>">
 
                     <% } else{ %>
                         <img class="card-img-top" src="/img/Slid/image_downloader_1661001390616.jpg" alt="Turismo">
                     <% } %>
 
                     <div class="card-body">
-                      <h3 class="card-title"> <%=servico.name %> </h3>
+                      <div class="card-header">
+                        <h3 class="card-title"> <%=processo.servico.name %> </h3>
+                        <p class="card-subtitle text-muted">Preço: <%=processo.servico.preco%></p>
+                      </div>
 
-                      <p class="card-subtitle text-muted">Preço: <%=servico.preco%></p>
+                      <br>
 
-                      <h5 class="card-header">Serviços:</h5>
-                      <ul>
-                        <% servico.microServicos.forEach(ms => { %>
-                            <li><%=ms %></li>
-                        <% }) %>
-                      </ul>
+                      <div class="card-header header-client">
+                        <h5>
+                          <span id="nameVal"><%=processo.client.name %></span> 
+                          <span id="apelidoVal"><%=processo.client.apelido %></span> 
+                        </h5>
+                        <p class="card-subtitle text-muted">
+                          Telefone: <span id="telefoneVal"><%=processo.client.telefone%></span>
+                        </p>
+                      </div>
 
-                      <h5 class="card-header">Requisitos :</h5>
-                      <ul>
-                        <% servico.requisitos.forEach(ms => { %>
-                            <li><%=ms %></li>
-                        <% }) %>
-                      </ul>
+                      <br>
+
+                      <p class="campo">nº de passaporte: <br class="d-md-none"> <span class="valor" id="passaportVal"><%=processo.client.passaport %></span></p>
+                      <p class="campo">validade do passaporte: <br class="d-md-none"> <span class="valor" id="passaportDataVal"><%=processo.client.passaportDate %></span></p>
+                      <p class="campo">data de nascimento: <br class="d-md-none"> <span class="valor" id="nascimentoVal"><%=processo.client.nascimento %></span></p>
+                      <p class="campo">nº de bilhete de identidade: <br class="d-md-none"> <span class="valor" id="biVal"><%=processo.client.bi %></span></p>
+
+                      <p class="campo">
+                        estado:
+                        <span class="valor" id="estadoVal">
+                          <% if(processo.estado){ %>
+                            Concluido
+                          <% }else{ %>
+                            Activo
+                          <% } %>
+                        </span>
+                      </p>
+
+                      <form class="" action="/processo/edit/<%=processo.id %>" method="post" id="form-edit">
+
+                        <div class="form-group opsao namePreco">
+                            <label for="estado"> Estado: </label>
+                            <select name="estado" id="estado" class="form-control">
+                                <option value="Concluido"> Concluido </option>
+                                <option value="Activo"> Activo </option>
+                            </select>
+                            <span class="obrigatorio">*</span>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label for="name">Nome:</label>
+                          <input type="text" name="name" id="name" placeholder="nome proprio" class="form-control"><span class="obrigatorio">*</span>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label for="apelido">Apelido:</label>
+                          <input type="text" name="apelido" id="apelido" placeholder="Apelido" class="form-control"> <span class="obrigatorio">*</span>
+                        </div>
+
+                        <label for="name"> Contacto:</label>
+
+                        <div class="form-group">
+                          <input type="text" name="telefone" id="telefone" placeholder="telefone: +244 999 999 999" class="form-control"><span class="obrigatorio">*</span>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="bi">Nº BI:</label>
+                          <input type="text" name="bi" id="bi" class="form-control" placeholder="Nº de Identificação"> <span class="obrigatorio">*</span>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="passaport">Nº Passaport:</label>
+                          <input type="text" name="passaport" id="passaport" class="form-control" placeholder="Nº Passaporte"> <span class="obrigatorio">*</span>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="nascimento">Data de Nascimento:</label>
+                          <input type="date" name="nascimento" id="nascimento" class="form-control"><span class="obrigatorio">*</span>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="passaportDate">Expiração do Passaport</label>
+                          <input type="date" name="passaportDate" id="passaportDate" class="form-control"><span class="obrigatorio">*</span>
+                        </div>
+
+                        <input type="submit" value="Salvar" class="col-12 my-4 btn btn-primary">
+
+                      </form>
 
                       <div class="card-actions">
-                        <a href="/service/edit/<%=servico.id %>" class="btn btn-primary">Editar</a>
+                        <a onclick="editar()" class="btnControl btn btn-primary">Editar</a>
 
-                        <a href="/service/excluir/<%=servico.id %>" class="btn btn-danger">Eliminar</a>
+                        <a href="/processo/delete/<%=processo.servico.id %>" class="btnControl btn btn-danger">Eliminar</a>
                       </div>
 
                     </div>
@@ -52,5 +121,48 @@
               <% } %>
         </div>
     </div>
+
+    <script>
+      
+      const name = $('#nameVal').text()
+      const apelido = $('#apelidoVal').text()
+      const passaport = $('#passaportVal').text()
+      const bi = $('#biVal').text()
+      const telefone = $('#telefoneVal').text()
+      const passaportData = $('#passaportDataVal').text()
+      const nascimento = $('#nascimentoVal').text()
+      const estado = $('#estadoVal').text()
+
+
+      function editar() {
+
+        $('#name').val(name)
+        $('#apelido').val(apelido)
+        $('#nascimento').val(nascimento)
+        $('#passaport').val(passaport)
+        $('#passaportDate').val(passaportData)
+        $('#bi').val(bi)
+        $('#telefone').val(telefone)
+        
+        $('#form-edit').css({
+          display: 'block',
+        })
+
+        $('.btnControl').css({
+          display: 'none',
+
+        })
+        
+        $('.campo').css({
+          display: 'none',
+
+        })
+
+        $('.header-client').css({
+          display: 'none',
+        })
+
+      }
+    </script>
 </body>
 </html>

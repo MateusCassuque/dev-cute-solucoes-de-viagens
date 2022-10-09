@@ -3,7 +3,6 @@ const path = require('path')
 const router = express.Router()
 
 const Processo =  require('../models/Processo')
-const Servico = require('../models/Servico')
 
 
 const jsonCRUD = require('../../config/jsonCRUD')
@@ -58,11 +57,68 @@ router.get('/show/:serviceId', async (req, res) => {
         const servico = processo.servico
         const client = processo.client
 
-        res.status(200).render('process/show', {processoId, servico, client})
+        res.status(200).render('process/show', { processo })
     }catch(err){
         res.status(400).send({
             Erro: 'Erro ao buscar o serviço pelo Id.'
         })
+    }
+})
+
+router.get('/delete/:processoId', async (req, res) => {
+  try {
+    const processos = await jsonCRUD.JSONRead(sf.pathP,sf.encoding).then(res => {
+        return res
+    })
+  
+    const id = req.params.processoId * 1
+  
+    const novosProcessos = processos.filter(pro => pro.id != id)
+  
+    jsonCRUD.JSONWrite(sf.pathP, novosProcessos, sf.encoding)
+
+    res.status(200).redirect('/auth/dashboard')
+  } catch (error) {
+    res.status(400).send({Erro: error})
+  }
+
+})
+
+router.post('/edit/:processoId', async (req, res) => {
+    try {
+        const id = req.params.processoId * 1
+        
+        const processos = await jsonCRUD.JSONRead(sf.pathP,sf.encoding).then(res => {
+            return res
+        })
+        
+        const processo = processos.find(pro => pro.id == id)
+
+        const estado = req.body.estado
+
+        processo.client.name = req.body.name
+        processo.client.apelido = req.body.apelido
+        processo.client.telefone = req.body.telefone
+        processo.client.bi = req.body.bi
+        processo.client.passaport = req.body.passaport
+        processo.client.nascimento = req.body.nascimento
+        processo.client.passaportDate = req.body.passaportDate
+
+        if(estado === 'Concluido'){
+            processo.estado = true
+        }else{
+            processo.estado = false
+        }
+        
+        const novosProcessos = processos.filter(pro => pro.id != id)
+
+        novosProcessos.push(processo)
+
+        jsonCRUD.JSONWrite(sf.pathP, novosProcessos, sf.encoding)
+
+        res.status(200).redirect('/auth/dashboard')
+    } catch (error) {
+        res.status(400).send({Erro: error})
     }
 })
 
