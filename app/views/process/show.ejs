@@ -100,14 +100,15 @@
                           <input type="date" name="passaportDate" id="passaportDate" class="form-control"><span class="obrigatorio">*</span>
                         </div>
 
+                        <a onclick="cancelar()" class="btn btn-danger">Cancelar</a>
                         <input type="submit" value="Salvar" class="col-12 my-4 btn btn-primary">
-
                       </form>
 
                       <div class="card-actions">
                         <a onclick="editar()" class="btnControl btn btn-primary">Editar</a>
-
-                        <a href="/processo/delete/<%=processo.servico.id %>" class="btnControl btn btn-danger">Eliminar</a>
+                        
+                        <!-- Button trigger modal -->
+                        <a class="btnControl btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmacao">Eliminar</a>
                       </div>
 
                     </div>
@@ -120,9 +121,28 @@
               </div>
               <% } %>
         </div>
-    </div>
-
-    <script>
+      </div>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="confirmacao" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmacaoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="confirmacaoLabel">Certaza?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Tem certeza que dezeja Eliminar este serviço?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Não</button>
+              <a href="/processo/delete/<%=processo.servico.id %>" class="btn btn-primary">Sim</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <script>
       
       const name = $('#nameVal').text()
       const apelido = $('#apelidoVal').text()
@@ -162,6 +182,26 @@
           display: 'none',
         })
 
+      }
+
+      function cancelar(){
+        $('#form-edit').css({
+          display: 'none',
+        })
+
+        $('.btnControl').css({
+          display: 'inline-block',
+
+        })
+        
+        $('.campo').css({
+          display: 'block',
+
+        })
+
+        $('.header-client').css({
+          display: 'block',
+        })
       }
     </script>
 </body>

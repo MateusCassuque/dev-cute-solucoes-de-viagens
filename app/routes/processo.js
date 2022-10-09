@@ -8,9 +8,10 @@ const Processo =  require('../models/Processo')
 const jsonCRUD = require('../../config/jsonCRUD')
 
 const sf = {
-  pathS: path.resolve(__dirname, '..', '..', 'config', 'jsons', 'services.json' ),
-  pathP: path.resolve(__dirname, '..', '..', 'config', 'jsons', 'processes.json' ),
-  encoding: 'utf-8'
+    pathU: path.resolve(__dirname, '..', '..', 'config', 'jsons', 'users.json' ),
+    pathS: path.resolve(__dirname, '..', '..', 'config', 'jsons', 'services.json' ),
+    pathP: path.resolve(__dirname, '..', '..', 'config', 'jsons', 'processes.json' ),
+    encoding: 'utf-8'
 }
 
 router.post('/:servicoId', async (req, res) => {
