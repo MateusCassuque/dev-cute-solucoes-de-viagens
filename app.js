@@ -1,5 +1,9 @@
 const express = require('express')
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser')
+
+// const session = require('express-session')
+// const connect = require('connect-flash')
+
 
 const app = express()
 const server = require('http').createServer(app)
@@ -10,8 +14,10 @@ const morgan = require('morgan')
 
 app.set('views', __dirname + '/app/views')
 app.set('view engine', 'ejs')
+
 // app.use(express.cookieParser('DSV'))
 // app.use(express.session())
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/app/public'))
@@ -33,7 +39,9 @@ app.use(morgan("dev"))
 
 require('./app/routes/index')(app)
 
-app.listen(3001, (()=>{
+const port = process.env.port || 3001
+
+app.listen(port, (()=>{
   console.log('SERVIDOR RONDANDO')
-  console.log('ACESSE EM: http://127.0.0.1:3001')
+  console.log('ACESSE EM: http://127.0.0.1:'+port)
 }))

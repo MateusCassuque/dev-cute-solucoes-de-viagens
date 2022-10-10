@@ -12,6 +12,14 @@
 <body>
   <%- include('../layout/navbar') %>
 
+  <% if(clientNovo){ %>
+    <p class="alert alert-info" role="alert" id="sucesso">
+      Processo enviado com sucesso! <br class="d-md-none">
+      <strong><%=clientNovo.name%> <%=clientNovo.apelido%></strong>
+      entraremos em contacto dentro de 12 horas.
+    </p>
+  <% } %>
+
   <div class="row col-12 col-md-11 offset-md-1" id="principal">
     <% if(servico){ %>
       <div class="card col-md-6 m-2">
@@ -129,6 +137,10 @@
       })
       const footer = $('#footer-card').css({
         visibility: 'hidden',
+      })
+      
+      $('#sucesso').css({
+        display: 'none',
       })
     }
 

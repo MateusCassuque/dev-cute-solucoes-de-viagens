@@ -135,8 +135,10 @@ router.get('/service/:servicoId', async (req, res) => {
     const id = req.params.servicoId * 1
   
     const servico = servicos.find( s => s.id == id)
+
+    var clientNovo = null
   
-    res.status(200).render('service', { servico })
+    res.status(200).render('service', { servico, clientNovo })
   } catch (error) {
     res.status(400).send({
       Error: 'Erro ao encontrar o serviço'

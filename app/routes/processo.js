@@ -35,7 +35,9 @@ router.post('/:servicoId', async (req, res) => {
 
         const processo = new Processo(client, servico)
 
-        res.render('service', {servico})
+        var clientNovo = client
+
+        res.render('service', {servico, clientNovo})
 
     } catch (error) {
         console.log(error)
@@ -44,6 +46,7 @@ router.post('/:servicoId', async (req, res) => {
 
 router.get('/show/:serviceId', async (req, res) => {
     try{
+        
         const processos = await jsonCRUD.JSONRead(sf.pathP,sf.encoding).then(res => {
             return res
         })
@@ -53,10 +56,6 @@ router.get('/show/:serviceId', async (req, res) => {
         if(!processo){
             res.status(404).send({Erro: 'Service no Found!'})
         }
-
-        const processoId = processo.id
-        const servico = processo.servico
-        const client = processo.client
 
         res.status(200).render('process/show', { processo })
     }catch(err){

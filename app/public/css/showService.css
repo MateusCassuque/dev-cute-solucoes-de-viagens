@@ -6,3 +6,7 @@
 .container #card #processos-count{
     color: rgb(0, 76, 255);
 }
+
+.container #card #clients{
+    font-size: small;
+}
