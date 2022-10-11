@@ -1,3 +1,23 @@
 [
-    
+  {
+    "id": 1,
+    "name": "Agendamento",
+    "preco": "13 000,00 Kz",
+    "estado": false,
+    "createdAte": 1665444806268
+  },
+  {
+    "id": 3,
+    "name": "Reserva de Vôo",
+    "preco": "3 500,00 Kz",
+    "estado": false,
+    "createdAte": 1665445527265
+  },
+  {
+    "id": 4,
+    "name": "Reserva de Hotel",
+    "preco": "6 000,00 Kz",
+    "estado": false,
+    "createdAte": 1665445722431
+  }
 ]

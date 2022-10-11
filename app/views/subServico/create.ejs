@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Novo Sub-Serviço</title>
+    <link rel="stylesheet" href="../css/register.css">
+</head>
+<body>
+    <%- include('../layout/navbar') %>
+  
+    <div class="" id="formCreate">
+        <h1>Novo Sub-Serviço</h1>
+        
+        <% if(subservico){ %>
+            
+            <div class="card text-bg-success mb-3 border-success m-2 valueControl">
+     
+                <div class="card-header">Sub-Serviço Cadastrado com sucesso!</div>
+         
+                <div class="card-body">
+                    <h5 class="card-title"> ( <%=subservico.name %> ) </h5>
+                    
+                    <p class="card-text">por apenas: <strong class="text-success" id="preco-card"> <%=subservico.preco %> </strong> </p>
+                </div>
+    
+            </div>
+
+            <div class="btn-group col-12">
+                <a href="/auth/dashboard" class="btn btn-dark valueControl m-1">Casa</a>
+                <a onclick="novo()" class="btn btn-primary valueControl m-1">Novo</a>
+            </div>
+        <% } %>
+        
+        <form action="/subservico" id="form-dados" class="col-10 col-md-4" method="post">
+            
+            <div class="form-group opsao namePreco">
+                <label for="name">Nome</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Nome do Serviço">
+            </div>
+            
+            <div class="form-group opsao namePreco">
+                <label for="preco">Preço: </label>
+                <input type="text" name="preco" id="preco" class="form-control" placeholder="Preço do Serviço">
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Salvar"  class="btn btn-primary large my-4 col-12" onclick="next('', '#btn2', '')">
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        const preco = $('#preco-card').text()
+
+        if(preco){
+            $('#form-dados').css({
+                display: 'none'
+            })
+        }
+
+        function novo(){
+            $('.valueControl').css({
+                display: 'none'
+            })
+
+            $('#form-dados').css({
+                display: 'block'
+            })
+        }
+    </script>
+
+</body>
+</html>

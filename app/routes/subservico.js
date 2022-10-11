@@ -22,21 +22,27 @@ const sf = {
 
 router.post('/', async (req, res) => {
     try {
-        const subservico  = req.body
+        const valor = req.body.preco * 1
 
+        const preco = valor.toLocaleString('pt-AO', {style: 'currency', currency: 'AOA'})
+
+        const subservico = {
+            name: req.body.name,
+            preco: preco
+        }
         const novoSubservico = new Subservico(subservico)
 
-        res.render('subservico/create', {novoSubservico})
+        res.status(200).render('subservico/create', {subservico})
 
     } catch (error) {
-        console.log(error)
+        res.status(400).send({Erro: 'Erro criar o sub-Serviço: ' + error})
     }
 })
 
 router.get('/create', async (req, res) => {
     try{
-
-        res.status(200).render('subservico/create', {  })
+        const subservico = null
+        res.status(200).render('subservico/create', { subservico })
     }catch(err){
         res.status(400).send({
             Erro: 'Erro ao buscar o serviço pelo Id.'
