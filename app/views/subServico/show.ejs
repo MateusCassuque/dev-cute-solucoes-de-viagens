@@ -11,30 +11,29 @@
 <body>
     <%- include('../layout/navbar') %>
 
-    <div class="row" id="formCreate">
-        <h1 id="titulo"> Reservar Serviço </h1>   
-       
-        <div class="col-md-5 col-10" id="colCard">
-            <% if(subServico){ %>
-                <div id="card-servico" class="card text-bg-success border-success m-2 valueControl">
+    <div class="" id="formCreate">
+        <h1 id="titulo"> Editar Sub-Serviço </h1>   
+        <% if(subServico){ %>
+            
+            <div class="card text-bg-success mb-3 border-success m-2 valueControl">
+     
+                <div class="card-header">Sub-Serviço Cadastrado com sucesso!</div>
          
-                    <div class="card-header">Sub-Serviço Cadastrado com sucesso!</div>
-             
-                    <div class="card-body">
-                        <h5 class="card-title"> ( <span id="titleName"><%=subServico.name %></span> ) </h5>
-                        
-                        <p class="card-text">Preço: <strong class="text-success" id="preco-card"> <%=subServico.preco %> </strong> </p>
-                    </div>
-        
+                <div class="card-body">
+                    <h5 class="card-title"> ( <span id="titleName"><%=subServico.name %></span> ) </h5>
+                    
+                    <p class="card-text">Preço: <strong class="text-success" id="preco-card"> <%=subServico.preco %> </strong> </p>
                 </div>
     
-                <div class="btn-group col-12">
-                    <a onclick="novo()" class="btn btn-primary valueControl m-1">Reservar</a>
-                </div>
-            <% } %>
-        </div>
+            </div>
+
+            <div class="btn-group col-12">
+                <a onclick="novo()" class="btn btn-primary valueControl m-1">Editar</a>
+                <a data-bs-toggle="modal" data-bs-target="#confirmacao" class="btn btn-danger valueControl m-1">Eliminar</a>
+            </div>
+        <% } %>
         
-        <form action="/subservico/edit/<%=subServico.id%>" id="form-dados" class="col-10 col-md-5" method="post">
+        <form action="/subservico/edit/<%=subServico.id%>" id="form-dados" class="col-10 col-md-4" method="post">
             
             <div class="form-group opsao namePreco">
                 <label for="estado"> Estado: </label>
@@ -84,6 +83,10 @@
         const preco = $('#preco-card').text()
         const name = $('#titleName').text()
 
+        $('#titulo').css({
+            display: 'none'
+        })
+
         if(preco){
             $('#form-dados').css({
                 display: 'none'
@@ -91,10 +94,19 @@
         }
 
         function novo(){
+            $('.valueControl').css({
+                display: 'none'
+            })
 
             $('#form-dados').css({
                 display: 'block'
-            })      
+            })
+
+            $('#titulo').css({
+                display: 'block'
+            })
+
+            $('#name').val(name)           
         }
     </script>
     

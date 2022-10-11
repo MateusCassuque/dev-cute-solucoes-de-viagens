@@ -8,51 +8,23 @@ const Servico = require('../models/Servico')
 const multerConfig = require('../../config/multerConfig')
 
 
-const cService = {
+const dbc = {
   path: path.resolve(__dirname, '..', '..', 'config', 'jsons', 'services.json' ),
+  pathSbs: path.resolve(__dirname, '..', '..', 'config', 'jsons', 'subservicos.json' ),
   encoding: 'utf-8'
 }
 
-const subServicosCro = [
-  {
-    tipo: 'Agendamento',
-    preco: 15000,
-  },
-
-  {
-    tipo: 'Reserva Hotel',
-    preco: 6000,
-  },
- 
-  {
-    tipo: 'Reserva de Vôo',
-    preco: 2500,
-  },
-
-  {
-    tipo: 'Formulário',
-    preco: 6000,
-  },
-
-] 
-const subServicos = []
-
-const preench = (() => {
-  subServicosCro.forEach(s => {
-    s.preco = s.preco.toLocaleString('pt-AO', {style: 'currency', currency: 'AOA'})
-    subServicos.push(s)
-  })
-})
-
 router.get('/', async (req,res) => {
   try {
-    const servicos = await jsonCRUD.JSONRead(cService.path, cService.encoding).then(res => {
+    const servicos = await jsonCRUD.JSONRead(dbc.path, dbc.encoding).then(res => {
       return res
     })
-    if(subServicos.length == 0){
-      preench()
-    }
-    res.status(200).render('home', {subServicos, servicos})
+    
+    const subservicos = await jsonCRUD.JSONRead(dbc.pathSbs, dbc.encoding).then(res => {
+      return res
+    })
+    
+    res.status(200).render('home', {subservicos, servicos})
   } catch (error) {
     res.status(400).res.send({
       Error: 'Erro to access the home page'
@@ -70,7 +42,7 @@ router.post('/sendImage/:servicoId', multer(multerConfig).single('file'), async 
   const image = req.file
   
   try {
-    const servicos = await jsonCRUD.JSONRead(cService.path, cService.encoding).then(res => {
+    const servicos = await jsonCRUD.JSONRead(dbc.path, dbc.encoding).then(res => {
       return res
     })
     
@@ -80,7 +52,7 @@ router.post('/sendImage/:servicoId', multer(multerConfig).single('file'), async 
     }
     return s
   })
-  jsonCRUD.JSONWrite(cService.path, novoServicos, cService.encoding)
+  jsonCRUD.JSONWrite(dbc.path, novoServicos, dbc.encoding)
     
     res.status(200).redirect('/auth/dashboard')
   } catch (error) {
@@ -104,7 +76,7 @@ router.post('/', async (req, res) => {
 
     const newServico = new Servico(servico)
 
-    const servicos = await jsonCRUD.JSONRead(cService.path, cService.encoding).then(res => {
+    const servicos = await jsonCRUD.JSONRead(dbc.path, dbc.encoding).then(res => {
       return res
     })
     
@@ -124,7 +96,7 @@ router.post('/', async (req, res) => {
 
 router.get('/service/:servicoId', async (req, res) => {
   try {
-    const servicos = await jsonCRUD.JSONRead(cService.path, cService.encoding).then(res => {
+    const servicos = await jsonCRUD.JSONRead(dbc.path, dbc.encoding).then(res => {
       return res
     })
     
@@ -147,7 +119,7 @@ router.get('/service/:servicoId', async (req, res) => {
 })
 
 router.get('/remove', async (req, res) => {
-  // const servicos = await jsonCRUD.JSONRead(cService.path, cService.encoding).then(res => {
+  // const servicos = await jsonCRUD.JSONRead(dbc.path, dbc.encoding).then(res => {
   //   return res
   // })
 
@@ -157,7 +129,7 @@ router.get('/remove', async (req, res) => {
   //   }
   //   return s
   // })
-  // jsonCRUD.JSONWrite(cService.path, novaArray, cService.encoding)
+  // jsonCRUD.JSONWrite(dbc.path, novaArray, dbc.encoding)
   // console.log(novaArray)
   
   // res.render('auth/showProcess', {novaArray})

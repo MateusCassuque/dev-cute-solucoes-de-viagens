@@ -117,21 +117,22 @@
   <h3 id="ofertaH3" class="m-4">Sub-Serviços:</h3>
 
   
-  <div class="row col-11" id="subServicos">
-    <% subServicos.forEach(servico => { %>
-    <div class="card text-bg-success mb-3 border-success m-2">
+  <div class="row col-12">
+    <% subservicos.forEach(servico => { %>
+      <div id="subservicos" class="col-md-2">
+        <div id="subservicos-card" class="col-12 card text-bg-success mb-3 border-success m-2">
       
-      <div class="card-header">Solicitação</div>
-      
-      <div class="card-body">
-        <h5 class="card-title"> (<%=servico.tipo %>) </h5>
-        <p class="card-text">por apenas: <strong class="text-success"> <%=servico.preco %> </strong> </p>
-
-        <a href="#" class="btn btn-success">Reservar</a>
-
+          <div class="card-header">Solicitação</div>
+          
+          <div class="card-body">
+            
+            <h5 class="card-title m-2 my-3"> (<%=servico.name %>) </h5>
+            <a href="/subservico/<%=servico.id%>" class="btn btn-success">Detalhes</a>
+    
+          </div>
+    
+        </div> 
       </div>
-
-    </div> 
     <% }) %>
   </div>
 </div>

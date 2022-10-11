@@ -73,7 +73,7 @@ router.get('/delete/:processoId', async (req, res) => {
   
     const id = req.params.processoId * 1
   
-    const novosProcessos = processos.filter(pro => pro.id != id)
+    const novosProcessos = await processos.filter(pro => pro.id != id)
   
     jsonCRUD.JSONWrite(sf.pathP, novosProcessos, sf.encoding)
 

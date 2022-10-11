@@ -7,6 +7,7 @@ const jsonCRUD = require('../../config/jsonCRUD')
 const sf = {
     pathU: path.resolve(__dirname, '..', '..', 'config', 'jsons', 'users.json' ),
     pathS: path.resolve(__dirname, '..', '..', 'config', 'jsons', 'services.json' ),
+    pathSb: path.resolve(__dirname, '..', '..', 'config', 'jsons', 'subservicos.json' ),
     pathP: path.resolve(__dirname, '..', '..', 'config', 'jsons', 'processes.json' ),
     encoding: 'utf-8'
 }
@@ -50,8 +51,11 @@ router.get('/dashboard', async (req, res) => {
         const servicos = await jsonCRUD.JSONRead(sf.pathS,sf.encoding).then(res => {
             return res
         })
+        const subservicos = await jsonCRUD.JSONRead(sf.pathSb,sf.encoding).then(res => {
+            return res
+        })
         
-        res.status(200).render('auth/dashboard', {servicos, processos})
+        res.status(200).render('auth/dashboard', {servicos, processos,subservicos})
     } catch (error) {
         console.log(error)
         res.status(400).send({Error: 'Algo deu errado!: ' + error})
