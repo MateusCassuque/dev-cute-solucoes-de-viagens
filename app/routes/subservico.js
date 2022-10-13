@@ -82,7 +82,9 @@ router.get('/:serviceId', async (req, res) => {
             res.status(404).send({Erro: 'Service no Found!'})
         }
 
-        res.status(200).render('subservico', { subServico })
+        var clientNovo = null
+
+        res.status(200).render('subservico', { subServico, clientNovo })
     }catch(err){
         res.status(400).send({
             Erro: 'Erro ao buscar o serviço pelo Id.'

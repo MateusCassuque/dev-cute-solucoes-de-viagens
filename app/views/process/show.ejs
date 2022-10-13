@@ -53,8 +53,11 @@
                         </span>
                       </p>
 
-                      <form class="" action="/processo/edit/<%=processo.id %>" method="post" id="form-edit">
-
+                      <% if(processo.servico.microServicos){ %>
+                        <form action="/processo/edit/<%=processo.id %>" method="post" id="form-edit">
+                      <% } else{ %>
+                        <form action="/processo/sub/edit/<%=processo.id %>" method="post" id="form-edit">
+                      <% } %>
                         <div class="form-group opsao namePreco">
                             <label for="estado"> Estado: </label>
                             <select name="estado" id="estado" class="form-control">
@@ -136,7 +139,13 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Não</button>
-              <a href="/processo/delete/<%=processo.id %>" class="btn btn-primary">Sim</a>
+
+              <% if(processo.servico.microServicos){ %>
+                <a href="/processo/delete/<%=processo.id %>" class="btn btn-primary">Sim</a>
+              <% } else{ %>
+                <a href="/processo/sub/delete/<%=processo.id %>" class="btn btn-primary">Sim</a>
+              <% } %>
+                
             </div>
           </div>
         </div>

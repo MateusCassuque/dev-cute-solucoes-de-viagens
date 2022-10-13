@@ -18,7 +18,14 @@
             <% if(subServico){ %>
                 <div id="card-servico" class="card text-bg-success border-success m-2 valueControl">
          
-                    <div class="card-header">Sub-Serviço Cadastrado com sucesso!</div>
+                    <% if(clientNovo){ %>
+                        <div class="card-header bg-primary"> 
+                            <span id="nomeClient"><%=clientNovo.name%>, </span> 
+                            Serviço reservado com sucesso!
+                        </div>
+                    <% } else{ %>
+                        <div class="card-header">Reservar um Serviço</div>
+                    <% } %>
              
                     <div class="card-body">
                         <h5 class="card-title"> ( <span id="titleName"><%=subServico.name %></span> ) </h5>
@@ -29,34 +36,52 @@
                 </div>
     
                 <div class="btn-group col-12">
-                    <a onclick="novo()" class="btn btn-primary valueControl m-1">Reservar</a>
+                    <a onclick="reservar()" id="reservar" class="btn btn-primary valueControl m-1">Reservar</a>
                 </div>
             <% } %>
         </div>
         
-        <form action="/subservico/edit/<%=subServico.id%>" id="form-dados" class="col-10 col-md-5" method="post">
-            
-            <div class="form-group opsao namePreco">
-                <label for="estado"> Estado: </label>
-                <select name="estado" id="estado" class="form-control">
-                    <option value="Concluido"> Concluido </option>
-                    <option value="Activo"> Activo </option>
-                </select>
-                <span class="obrigatorio">*</span>
-            </div>
+        <form action="/processo/sub/<%=subServico.id%>" id="form-dados" class="col-10 col-md-5" method="post">
         
             <div class="form-group opsao namePreco">
                 <label for="name">Nome</label>
-                <input type="text" name="name" id="name" class="form-control" placeholder="Nome do Serviço">
+                <input type="text" name="name" id="name" class="form-control" placeholder="Nome do Requerente">
             </div>
             
             <div class="form-group opsao namePreco">
-                <label for="preco">Preço: </label>
-                <input type="text" name="preco" id="preco" class="form-control" placeholder="Preço do Serviço">
+                <label for="apelido">Apelido: </label>
+                <input type="text" name="apelido" id="apelido" class="form-control" placeholder="Apelido do Requerente">
+            </div>
+
+            <div class=" form-group opsao">
+                <label for="telefone">Contacto:</label>
+                <input type="tel" name="telefone" id="telefone" placeholder="telefone: +244 999 999 999" class="form-control"><span class="obrigatorio">*</span>
+                <input type="email" name="email" id="email" placeholder="Email: exemplo@gmail.com" class="form-control">
+                
+            </div>
+
+            <div class=" form-group opsao">
+              <label for="bi">Nº BI:</label>
+              <input type="text" name="bi" id="bi" class="form-control" placeholder="Nº de Identificação"> <span class="obrigatorio">*</span>
+            </div>
+            
+            <div class=" form-group opsao">
+              <label for="passaport">Nº Passaport:</label>
+              <input type="text" name="passaport" id="passaport" class="form-control" placeholder="Nº Passaporte"> <span class="obrigatorio">*</span>
+            </div> 
+            
+            <div class="form-group opsao">
+              <label for="nascimento">Data de Nascimento:</label>
+              <input type="date" name="nascimento" id="nascimento" class="form-control">
+            </div>
+            
+            <div class="form-group opsao">
+              <label for="nascimento">Expiração do Passaport</label>
+              <input type="date" name="passaportDate" id="nascimento" class="form-control">
             </div>
             
             <div class="form-group">
-                <input type="submit" value="Salvar"  class="btn btn-success large my-4 col-12" onclick="next('', '#btn2', '')">
+                <input type="submit" value="Salvar"  class="btn btn-success large my-4 col-12">
             </div>
         </form>
     </div>
@@ -82,7 +107,6 @@
     
     <script>
         const preco = $('#preco-card').text()
-        const name = $('#titleName').text()
 
         if(preco){
             $('#form-dados').css({
@@ -90,11 +114,17 @@
             })
         }
 
-        function novo(){
+        function reservar(){
 
             $('#form-dados').css({
                 display: 'block'
-            })      
+            })
+
+            $('#reservar').css({
+                display: 'none'
+            })
+
+            $('#name').focus()
         }
     </script>
     

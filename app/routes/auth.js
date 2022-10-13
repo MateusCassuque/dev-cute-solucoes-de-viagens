@@ -9,6 +9,7 @@ const sf = {
     pathS: path.resolve(__dirname, '..', '..', 'config', 'jsons', 'services.json' ),
     pathSb: path.resolve(__dirname, '..', '..', 'config', 'jsons', 'subservicos.json' ),
     pathP: path.resolve(__dirname, '..', '..', 'config', 'jsons', 'processes.json' ),
+    pathSP: path.resolve(__dirname, '..', '..', 'config', 'jsons', 'subprocessos.json' ),
     encoding: 'utf-8'
 }
 
@@ -47,6 +48,10 @@ router.get('/dashboard', async (req, res) => {
         const processos = await jsonCRUD.JSONRead(sf.pathP,sf.encoding).then(res => {
             return res
         })
+
+        const subprocessos = await jsonCRUD.JSONRead(sf.pathSP,sf.encoding).then(res => {
+            return res
+        })
         
         const servicos = await jsonCRUD.JSONRead(sf.pathS,sf.encoding).then(res => {
             return res
@@ -54,16 +59,64 @@ router.get('/dashboard', async (req, res) => {
         const subservicos = await jsonCRUD.JSONRead(sf.pathSb,sf.encoding).then(res => {
             return res
         })
-        
-        res.status(200).render('auth/dashboard', {servicos, processos,subservicos})
+        var result = null
+        res.status(200).render('auth/dashboard', {
+            servicos, 
+            processos,
+            subservicos,
+            subprocessos,
+            result
+        })
     } catch (error) {
         console.log(error)
         res.status(400).send({Error: 'Algo deu errado!: ' + error})
     }
 })
     
-router.get('/show/:processId', (req, res) => {
-    res.render('auth/showProcess')
+router.get('/buscar', async (req, res) => {
+
+    var result = {
+        tipo: req.query.tipo,
+        name: req.query.search
+    }
+    
+    try {
+        const processos = await jsonCRUD.JSONRead(sf.pathP,sf.encoding).then(res => {
+            return res
+        })
+
+        const subprocessos = await jsonCRUD.JSONRead(sf.pathSP,sf.encoding).then(res => {
+            return res
+        })
+        
+        const servicos = await jsonCRUD.JSONRead(sf.pathS,sf.encoding).then(res => {
+            return res
+        })
+        const subservicos = await jsonCRUD.JSONRead(sf.pathSb,sf.encoding).then(res => {
+            return res
+        })
+
+        if(result.tipo == 'Serviço'){
+            result.list = servicos.filter(s => s.name == result.name)
+        }else if(result.tipo == 'Sub-Serviço'){
+            result.list = subservicos.filter(sbs => sbs.name == result.name)
+        }else if(result.tipo == 'Sub-Processo'){
+            result.list = subprocessos.filter(sbp => sbp.client.name == result.name)
+        }else if(result.tipo == 'Processo'){
+            result.list = processos.filter(p => p.client.name == result.name)
+        }
+
+        res.status(200).render('auth/dashboard', {
+            servicos, 
+            processos,
+            subservicos,
+            subprocessos,
+            result
+        })
+        
+    }catch(error){
+        res.status(400).send({Erro: 'Erro ao Procurar por ' + result.name + error})
+    }
 })
 
 module.exports = app => app.use('/auth', router)
