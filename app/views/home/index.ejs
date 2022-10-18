@@ -62,7 +62,74 @@
   </div>
 
 
-  <h3 id="ofertaH3" class="m-4">Serviços</h3>
+
+
+
+
+
+
+  <h3 id="novidades" class="m-4">Novidades</h3>
+
+  <div class="row col-10" id="servicos">
+    <% servicos.forEach(servico => { %>
+    
+      <div class="card" style="width: 33rem; margin: 15px;">
+        
+        <div class="card-header"> { cabecalho do Post } </div>
+        
+        
+        <div class="card-body">
+          <div class="img-card">
+            <img src="/favicon.png" alt="Foto do Post" class="card-img img-fluid">
+
+          </div>
+
+          <h2 class="card-title"> <%=servico.name%> </h2>
+          <p class="card-sub-title text-muted mb-4"> <%=servico.preco%> </p>
+        
+          <div class="card-text" id="conteudo">
+            <strong class="showServico">Cuidamos de:</strong>
+            
+            <p class="text-muted">
+              <%const microServicos = servico.microServicos.toString() %>
+              
+              <%=microServicos %>
+            </p>
+            <strong class="showServico">Requisitos:</strong>
+            
+            <p class="text-muted">
+              <%const requisitos = servico.requisitos.toString() %>
+              
+              <%=requisitos %>
+            </p>
+            
+          </div>
+          
+          <div class="card-actions">
+            <a href="#" class="mt-4 btn btn-primary">Ler Mais</a>
+          </div>
+          
+        </div>
+        
+        <div class="card-footer"> 
+          <% const t = new Date() %> 
+          <%= t %> 
+        </div>
+
+      </div>
+
+      <% }) %>
+      
+  </div>
+
+
+
+
+
+
+
+
+  <h3 id="ofertaH3" class="m-4">Serviços Disponíveis</h3>
   <h5 id="ofertaH5" class="m-4">Consultória para pedido de Visto nas seguintes categórias:</h5>
 
   <div class="row col-11" id="servicos">
@@ -70,7 +137,7 @@
     <div class="card" style="width: 33rem; margin: 15px;">
       
       <% if(servico.imagem){ %>
-        <img class="card-img-top" src="/img/services/<%=servico.imagem%>" alt="<%=servico.name %>">
+        <img class="card-img-top img-fluid" src="/img/services/<%=servico.imagem%>" alt="<%=servico.name %>">
       <% } else{ %>    
         <img class="card-img-top" src="/img/Slid/image_downloader_1661001390616.jpg" alt="Turismo">
       <% } %>
@@ -114,9 +181,8 @@
 
   </div>
   
-  <h3 id="ofertaH3" class="m-4">Sub-Serviços:</h3>
+  <h3 id="sub-ofertaH3" class="m-4">Sub-Serviços:</h3>
 
-  
   <div class="row col-12">
     <% subservicos.forEach(servico => { %>
       <div id="subservicos" class="col-md-2">

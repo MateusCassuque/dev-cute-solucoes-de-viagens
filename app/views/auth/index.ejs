@@ -1,54 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DSV - Login</title>
-
+    
     <!-- Css do Bootstrap -->
     <link rel="stylesheet" href="/assets/dist/css/bootstrap.min.css">
-
+    
     <!-- CSS do Pagina -->
     <link rel="stylesheet" href="/css/auth.css">
     <!--link para O javaScript bootstrap da pagina-->
     <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="card" id="card-login">
-
-          <div class="card-header">
-            <h5>lOGIN</h5>
-          </div>
-          
-          <div class="card-body">
-            <form action="/auth" method="post">
-              <div class="row">
-                
-                <div class="form-group">
-                  <label for="email">Email:</label>
-                  <input type="text" name="email" id="email" placeholder="email proprio" class="form-control">
-                </div>
-                
-                <div class="form-group">
-                  <label for="senha">Senha:</label>
-                  <input type="password" name="senha" id="senha" placeholder="senha" class="form-control">
-                </div>
-    
+      
+      <a href="/">
+        <img src="/favicon.png" alt="" id="logo">
+      </a>
+      
+      <div class="card" id="card-login">
+        
+        <div class="card-body">
+          <form action="/auth" method="post">
+            <div class="row">
               
-    
-                <input type="submit" value="Enviar" class="my-4 btn btn-primary">
-                
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" name="email" id="email" placeholder="email proprio" class="form-control">
               </div>
-            </form>
+              
+              <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" id="senha" placeholder="senha" class="form-control">
+              </div>
+              
+              <input type="submit" value="Enviar" class="my-4 btn btn-primary">
+            </div>
+          </form>
+          
         </div>
-        <div class="card-footer bg-white">
+        <div class="card-footer">
           <a href="/" class="text-muted">Não tenho conta!</a>
         </div>
-    </div>
+      </div>
+    </div>  
     
-    <script src="/assets/dist/js/bootstrap.min.js"></script>
     <script src="/assets/dist/jquery/dist/jquery.min.js"></script>
-</body>
-</html>
+    <script src="/assets/dist/js/bootstrap.min.js"></script>
+    
+  </body>
+</html>  
+    

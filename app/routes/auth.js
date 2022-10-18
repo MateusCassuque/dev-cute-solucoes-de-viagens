@@ -119,4 +119,12 @@ router.get('/buscar', async (req, res) => {
     }
 })
 
+router.get('/posts', async (req, res) => {
+    try{
+        res.status(200).render('auth/postagens')
+    }catch(error){
+        res.status(400).send(error)
+    }
+})
+
 module.exports = app => app.use('/auth', router)

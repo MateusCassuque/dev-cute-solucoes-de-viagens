@@ -11,18 +11,10 @@
 
 </head>
 <body>
-    <%- include('../layout/navbar') %>
-    <div id="slidTitulo">
-        <h2>
-            <b> Dev-Cute </b> <br><small><b>Soluções de Viagens</b></small> 
-            <div class="mask">
-                <strong data-show>A Solução para o teu negócio. </strong>
-                <strong>Dá um nivel a Mais no que você faz!</strong>
-                <strong>O Futuro chegou mais cedo!</strong>
-                <strong>Só acerta quem tenta!</strong>
-            </div>
-        </h2>
-        <form action="/auth/buscar/">
+    <%- include('../layout/navbarAdmin') %>
+    
+    <% if(result){ %>
+        <form action="/auth/buscar/" id="busrcarForm">
             <div class="mb-3 form-group">
                 <label for="tipo" class="form-label"> Filtrar Por: </label>
                 <select id="tipo" name="tipo" class="form-select">
@@ -32,23 +24,20 @@
                     <option value="Sub-Processo">Sub-Processo</option>
                 </select>
             </div>
-
+    
             <div class="form-group d-flex">
                 <input class="form-control me-2" type="search" name="search" id="search" placeholder="Pesquisar Nome" aria-label="Search">
                 <button class="btn btn-outline-primary" type="submit">Pesquisar</button>
             </div>
         </form>
-        
-    </div>
 
-    <% if(result){ %>
         <span class="m-2">
             Buscando Por: &nbsp;  
             <strong><%= result.name%></strong>
         </span>
         <a href="/auth/dashboard/" class="nav-link"> Voltar </a>
 
-        <table class="m-3 table table-hover">
+        <table class=" table table-hover">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -59,35 +48,39 @@
                 </tr>
             </thead>
             <tbody>
-                <% result.list.forEach(s => { %>
-                    <tr>
-                        <th scope="row"><%=s.id %></th>
-                        <% if(s.client){ %>
-                            <td><%=s.client.name %> <%=s.client.apelido %></td>
-                            <td><%=s.servico.name %></td>
-                        <% }else{ %>
-                            <td><%=s.name %></td>
-                            <td><%=s.preco %></td>
-                        <% } %>
-                        <td><%=s.estado %></td>
-                        
-                        
-                        <td>
-                            <% if(s.servico) { %>
-                                <% if(s.servico.microServicos){ %>
-                                    <a href="/processo/show/<%=s.id %>" class="btn btn-primary">Sim</a>
-                                <% } else{ %>
-                                    <a href="/processo/sub/show/<%=s.id %>" class="btn btn-primary">Sim</a>
-                                <% } %>
+                <% if(result.list) { %>
+                    
+                    <% result.list.forEach(s => { %>
+                        <tr>
+                            <th scope="row"><%=s.id %></th>
+                            <% if(s.client){ %>
+                                <td><%=s.client.name %> <%=s.client.apelido %></td>
+                                <td><%=s.servico.name %></td>
+                            <% }else{ %>
+                                <td><%=s.name %></td>
+                                <td><%=s.preco %></td>
                             <% } %>
-                        </td>
-                    </tr>
-                <% })%>
+                            <td><%=s.estado %></td>
+                            
+                            
+                            <td>
+                                <% if(s.servico) { %>
+                                    <% if(s.servico.microServicos){ %>
+                                        <a href="/processo/show/<%=s.id %>" class="btn btn-primary">Ver</a>
+                                    <% } else{ %>
+                                        <a href="/processo/sub/show/<%=s.id %>" class="btn btn-primary">Ver</a>
+                                    <% } %>
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% })%>
             </tbody>
-
+            
             <div class="card-header m-4">
                 Total encontrado: <strong id="total" class=" h2"> <%=result.list.length%> </strong>
             </div>
+            
+            <% }%>
         </table>
     <% }else{ %>
     
@@ -98,23 +91,23 @@
                     <div class="nav nav-tabs mb-2" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
                         type="button" role="tab" aria-controls="nav-home" aria-selected="true">
-                            <span class="d-none d-md-block">Serviços</span>
-                            <span class="d-block d-md-none">Sr</span>
+                            <span class=" d-md-block">Serviços</span>
+                            <!-- <span class="d-block d-md-none">Sr</span> -->
                         </button>
                         
                         <button class="nav-link" id="nav-tab1-tab" data-bs-toggle="tab" data-bs-target="#nav-tab1" type="button" role="tab" aria-controls="nav-tab1" aria-selected="false">
-                            <span class="d-none d-md-block">Processos</span>
-                            <span class="d-block d-md-none">Pr</span>
+                            <span class=" d-md-block">Processos</span>
+                            <!-- <span class="d-block d-md-none">Pr</span> -->
                         </button>
                         
                         <button class="nav-link" id="nav-tab2-tab" data-bs-toggle="tab" data-bs-target="#nav-tab2" type="button" role="tab" aria-controls="nav-tab2" aria-selected="false">
-                            <span class="d-none d-md-block">Sub-Serviços</span>
-                            <span class="d-block d-md-none">S.Sr</span>
+                            <span class=" d-md-block">Sub-Serviços</span>
+                            <!-- <span class="d-block d-md-none">S.Sr</span> -->
                         </button>
                         
                         <button class="nav-link" id="nav-tab3-tab" data-bs-toggle="tab" data-bs-target="#nav-tab3" type="button" role="tab" aria-controls="nav-tab3" aria-selected="false">
-                            <span class="d-none d-md-block">Sub-Processos</span>
-                            <span class="d-block d-md-none">S.Pr</span>
+                            <span class=" d-md-block">Sub-Processos</span>
+                            <!-- <span class="d-block d-md-none">S.Pr</span> -->
                         </button>
 
                     </div>
@@ -128,7 +121,7 @@
 
                     <a href="/register" class="btn btn-primary d-block my-4"> Novo Serviço </a>
                     
-                    <table class="table table-hover table-primary" id="tabela">
+                    <table class="table table-hover" id="tabela">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
