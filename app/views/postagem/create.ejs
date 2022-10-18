@@ -11,18 +11,54 @@
 
 </head>
 <body>
-    <%- include('../layout/navbarAdmin') %>
+    <%- include('../layout/navbar') %>
+
+    <div class="card-header">
+        <h1 style="text-align: center;">Criar Postagem</h1>
+    </div>
 
     <div class="container" id="principal">
         <form action="/post/create" method="post" class="m-4">
-            <fieldset>
-                <legend><h3>Criar Post</h3></legend>
-    
+            <fieldset id="check">
+                <div class="form-check">
+                    <legend>
+                        <small class="form-text text-muted m-4">Elementos adicionais: </small>
+                    </legend>
+                    <label class="form-check-label" for="titulo">
+                        Título
+                    </label>
+                    <input class="form-check-input" type="checkbox" id="titulo">
+                </div>
+                
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="subtitulo">
+                    <label class="form-check-label" for="subtitulo">
+                        Sub-Título
+                    </label>
+                </div>
+                
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="cabecalho">
+                    <label class="form-check-label" for="cabecalho">
+                        Cabeçalho
+                    </label>
+                </div>  
+                
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="image">
+                    <label class="form-check-label" for="image">
+                        Imagem
+                    </label>
+                </div>
+                
+            </fieldset>
+            
+            <fieldset id="inputs" class="d-none">          
                 <div class="form-group">
                     <label for="titulo">Título: </label>
                     <input type="text" name="titulo" class="form-control" id="titulo">
-                </div>          
-                
+                </div>        
+
                 <div class="form-group">
                     <label for="subtitulo">Sub-Título: </label>
                     <input type="text" name="subtitulo" class="form-control" id="subtitulo">
@@ -32,24 +68,28 @@
                     <label for="cabecalho">Cabeçalho: </label>
                     <input type="text" name="cabecalho" class="form-control" id="cabecalho">
                 </div>    
-                
-                <div class="form-group">
-                    <label for="conteudo">Texto</label>
-                    <textarea name="conteudo" class="form-control" id="conteudo" cols="50" rows="10" placeholder="O que há de novo?"></textarea>
-                    
-                    <input type="submit" value="Publicar" class=" mt-4 btn btn-primary col-12">
-                </div>
             </fieldset>
+            
+        </form>
+
+        <form action="" method="post" id="form-conteudo" class="m-4">
+            <div class="form-group">
+                <textarea name="conteudo" class="form-control" id="conteudo" cols="50" rows="10" placeholder="O que há de novo?"></textarea>
+                
+                <input type="submit" value="Publicar" class=" mt-4 btn btn-primary col-12">
+            </div>
         </form>
         
-        <form action="/post" method="post" class="m-4">
+        <form action="/post" method="post" class="m-4 d-none">
             <div class="form-group">
                 <label for="image">Imagem:</label>
-                <input type="file" name="file" id="file" class="form-control">
+                <input type="file" name="file" id="file" class="form-control-file">
             </div>
 
             <input type="submit" value="Salvar" class=" mt-4 btn btn-primary col-12">
         </form>
+        
+        
     </div>
 </body>
 </html>
