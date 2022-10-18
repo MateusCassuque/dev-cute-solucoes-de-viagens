@@ -1,8 +1,7 @@
-#busrcarForm,
-#slidTitulo{
+#busrcarForm{
     position: relative;
     box-shadow: 0px .3px 1px 0px rgba(13, 12, 12, 0.469);
-    width: 380px;
+    width: 300px;
     margin: 0 auto 80px auto;
     top: 50px;
 }
@@ -101,11 +100,6 @@ h2{
 
 /*Formatação única para os PCs*/
 @media(min-width: 720px){
-
-    
-    #slidTitulo{
-        width: 720px;
-    }
 
     .nav-link:hover{
         background-color: rgba(255, 255, 255, 0.091);

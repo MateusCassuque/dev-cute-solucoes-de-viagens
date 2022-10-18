@@ -16,12 +16,6 @@
     transition: all .6s;
 }
 
-@media (min-width: 720px) {    
-    #nav #navbarTogglerDemo03 ul{
-        margin: 0 auto;
-    }
-}
-
 #nav #navbarTogglerDemo03 li{
     margin: auto 5px;
 }
@@ -29,4 +23,22 @@
 
 #separador{
     padding: 18px;
+}
+
+#slidTitulo{
+    position: relative;
+    box-shadow: 0px .3px 1px 0px rgba(13, 12, 12, 0.469);
+    width: 300px;
+    margin: 0 auto 80px auto;
+    top: 50px;
+}
+
+@media(min-width: 720px) {    
+    #nav #navbarTogglerDemo03 ul{
+        margin: 0 auto;
+    }
+
+    #slidTitulo{
+        min-width: 650px;
+    }
 }

@@ -29,11 +29,8 @@ router.post('/', async (req, res) => {
     if(!user){
         const message = 'Não autorizado!'
   
-        console.log(message)
         res.status(400).render('auth', {message})
     }
-    
-    console.log(user)
     // req.session.userAdmin = userAdmin
     res.status(200).redirect('/auth/dashboard')  
 })
