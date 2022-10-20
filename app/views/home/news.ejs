@@ -1,0 +1,57 @@
+ <h3 id="novidades" class="m-4">Novidades</h3>
+
+  <div class="row col-10" id="servicos">
+    <% servicos.forEach(servico => { %>
+    
+      <div class="card" style="width: 33rem; margin: 15px;">
+        
+        <div class="card-header"> { cabecalho do Post } </div>
+        
+        
+        <div class="card-body">
+          <div class="img-card">
+            <img src="/favicon.png" alt="Foto do Post" class="card-img img-fluid">
+
+          </div>
+
+          <h2 class="card-title"> <%=servico.name%> </h2>
+          <p class="card-sub-title text-muted mb-4"> <%=servico.preco%> </p>
+        
+          <div class="card-text" id="conteudo">
+            <strong class="showServico">Cuidamos de:</strong>
+            
+            <p class="text-muted">
+              <%const microServicos = servico.microServicos.toString() %>
+              
+              <%=microServicos %>
+            </p>
+            <strong class="showServico">Requisitos:</strong>
+            
+            <p class="text-muted">
+              <%const requisitos = servico.requisitos.toString() %>
+              
+              <%=requisitos %>
+            </p>
+            
+          </div>
+          
+          <div class="card-actions">
+            <a href="#" class="mt-4 btn btn-primary">Ler Mais</a>
+          </div>
+          
+        </div>
+        
+        <div class="card-footer"> 
+          <% const t = new Date() %> 
+          <%= t %> 
+        </div>
+
+      </div>
+
+      <% }) %>
+      
+  </div>
+
+
+
+

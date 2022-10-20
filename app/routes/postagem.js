@@ -22,4 +22,13 @@ router.get('/create', async (req, res) => {
     }
 })
 
+router.post('/conteudo', async (req, res) => {
+    try{
+        console.log(req.body)
+        res.status(200).render('postagem/create')
+    }catch(error){
+        res.status(400).send(error)
+    }
+})
+
 module.exports = app => app.use('/post', router)
