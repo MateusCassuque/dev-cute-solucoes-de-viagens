@@ -30,7 +30,10 @@ router.get('/show/:serviceId', async (req, res) => {
 
         const serviceProcessos = processos.filter(pro => pro.servico.id == id)
         
-        res.status(200).render('service/show', {servico,serviceProcessos})
+        res.status(200).render('layout/admin', {
+            conteudo: 'service/show',
+            servico,serviceProcessos
+        })
     }catch(err){
         res.status(400).send({
             Erro: 'Erro ao buscar o serviço pelo Id.'

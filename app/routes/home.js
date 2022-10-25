@@ -24,7 +24,11 @@ router.get('/', async (req,res) => {
       return res
     })
     
-    res.status(200).render('home', {subservicos, servicos})
+    res.status(200).render('layout/home', {
+      conteudo: '/home/index',
+      subservicos, 
+      servicos
+    })
   } catch (error) {
     res.status(400).res.send({
       Error: 'Erro to access the home page'
@@ -34,7 +38,9 @@ router.get('/', async (req,res) => {
 
 
 router.get('/register', (req, res) => {
-  res.render('home/createService')
+  res.render('layout/home',{
+    conteudo: 'home/createService'
+  })
 })
 
 router.post('/sendImage/:servicoId', multer(multerConfig).single('file'), async (req, res) => {
@@ -110,7 +116,7 @@ router.get('/service/:servicoId', async (req, res) => {
 
     var clientNovo = null
   
-    res.status(200).render('service', { servico, clientNovo })
+    res.status(200).render('layout/home', {conteudo: 'service/index', servico, clientNovo })
   } catch (error) {
     res.status(400).send({
       Error: 'Erro ao encontrar o serviço'
@@ -118,7 +124,7 @@ router.get('/service/:servicoId', async (req, res) => {
   }
 })
 
-router.get('/remove', async (req, res) => {
+router.get('/wise', async (req, res) => {
   // const servicos = await jsonCRUD.JSONRead(dbc.path, dbc.encoding).then(res => {
   //   return res
   // })
@@ -132,6 +138,6 @@ router.get('/remove', async (req, res) => {
   // jsonCRUD.JSONWrite(dbc.path, novaArray, dbc.encoding)
   // console.log(novaArray)
   
-  // res.render('auth/showProcess', {novaArray})
+  res.render('pages/home/wise')
 })
 module.exports = app => app.use('/', router); 

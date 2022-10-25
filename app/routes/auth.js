@@ -14,7 +14,7 @@ const sf = {
 }
 
 router.get('/login', (req, res) => {
-    res.render('auth')
+    res.render('pages/auth')
 })
 
 router.post('/', async (req, res) => {
@@ -56,13 +56,14 @@ router.get('/dashboard', async (req, res) => {
         const subservicos = await jsonCRUD.JSONRead(sf.pathSb,sf.encoding).then(res => {
             return res
         })
-        var result = null
-        res.status(200).render('auth/dashboard', {
+
+        res.status(200).render('layout/admin', {
+            conteudo: 'auth/dashboard',
             servicos, 
             processos,
             subservicos,
             subprocessos,
-            result
+            result: null
         })
     } catch (error) {
         console.log(error)
@@ -103,7 +104,8 @@ router.get('/buscar', async (req, res) => {
             result.list = processos.filter(p => p.client.name == result.name)
         }
 
-        res.status(200).render('auth/dashboard', {
+        res.status(200).render('layout/admin', {
+            conteudo: 'auth/dashboard',
             servicos, 
             processos,
             subservicos,
@@ -118,7 +120,9 @@ router.get('/buscar', async (req, res) => {
 
 router.get('/posts', async (req, res) => {
     try{
-        res.status(200).render('auth/postagens')
+        res.status(200).render('layout/admin', {
+            conteudo: 'auth/postagens'
+        })
     }catch(error){
         res.status(400).send(error)
     }

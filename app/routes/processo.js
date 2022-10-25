@@ -5,6 +5,8 @@ const router = express.Router()
 const Processo =  require('../models/Processo')
 const Subprocesso =  require('../models/Subprocesso')
 
+const mailer = require('../../modules/mailer')
+
 
 const jsonCRUD = require('../../config/jsonCRUD')
 
@@ -28,19 +30,30 @@ router.post('/:servicoId', async (req, res) => {
 
         const id = req.params.servicoId * 1
 
-        var servico = null
-
-        servicos.forEach( s => {
-            if(s.id == id){
-                servico = s
-            }
-        })
+        var servico = servicos.find( s => s.id == id)
 
         const processo = new Processo(client, servico)
 
         var clientNovo = client
+        
+        console.log(client, servico)
 
-        res.render('service', {servico, clientNovo})
+        try {
+            mailer.sendMail({
+                to: 'mateusAbril7@gmail.com',
+                from: 'mateusAbril2@gmail.com',
+                template: 'newProcess',
+                context: {servico, client}
+            })
+            
+        } catch (error) {
+            
+        } 
+
+        res.status(200).render('layout/home', {
+            conteudo: 'service/index',
+            servico, clientNovo
+        })
 
     } catch (error) {
         console.log(error)
@@ -64,10 +77,13 @@ router.post('/sub/:servicoId', async (req, res) => {
 
         var clientNovo = client
 
-        res.render('subservico', {subServico, clientNovo})
+        res.status(200).render('layout/home', {
+            conteudo: 'subservico/index',    
+            subServico, clientNovo
+        })
 
     } catch (error) {
-        console.log(error)
+        res.status(400).send(error)
     }
 })
 
@@ -84,7 +100,10 @@ router.get('/sub/show/:serviceId', async (req, res) => {
             res.status(404).send({Erro: 'Service no Found!'})
         }
 
-        res.status(200).render('process/show', { processo })
+        res.status(200).render('layout/admin', {
+            conteudo: 'process/show',    
+            processo 
+        })
     }catch(err){
         res.status(400).send({
             Erro: 'Erro ao buscar o serviço pelo Id.'
@@ -168,7 +187,11 @@ router.get('/show/:serviceId', async (req, res) => {
             res.status(404).send({Erro: 'Service no Found!'})
         }
 
-        res.status(200).render('process/show', { processo })
+        res.status(200).render('layout/admin', {
+            conteudo: 'process/show',    
+            processo 
+        })
+
     }catch(err){
         res.status(400).send({
             Erro: 'Erro ao buscar o serviço pelo Id.'

@@ -1,0 +1,49 @@
+*{
+    color: rgb(97, 95, 95);
+    /* font-weight: 500; */
+    font-size: 22px;
+}
+
+#farstP{
+    /* font-weight: 400; */
+}
+
+#rodp{
+    margin: 25px 0;
+    border-top: solid 0.5px rgb(97, 95, 95);
+}
+
+#termos a{
+    color: rgb(2, 181, 217);
+    text-decoration: none;
+}
+h2{
+    color:rgb(2, 71, 145);
+}
+
+p{
+    text-align: justify;
+    margin: 15px 5px;
+}
+
+.card #img{
+    width: 250px;
+    margin: 0 auto;
+}
+
+#pr{
+    width: 100%;
+    height: 100vh;
+    
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#pr #card{
+    width: 500px;
+    margin: 0 auto;
+    border: none;
+}

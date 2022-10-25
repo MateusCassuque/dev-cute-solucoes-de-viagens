@@ -1,1 +1,24 @@
-[]
+[
+  {
+    "id": 1,
+    "client": {
+      "name": "Mauro",
+      "apelido": "Manucho",
+      "telefone": "+244 931 152 326",
+      "email": "cassuquem@gmail.co",
+      "bi": "00245522UE120",
+      "passaport": "N0213615",
+      "nascimento": "1996-01-12",
+      "passaportDate": "2023-03-02"
+    },
+    "servico": {
+      "id": 1,
+      "name": "Agendamento",
+      "preco": "15 300,00 Kz",
+      "estado": false,
+      "createdAte": 1665665996978
+    },
+    "estado": false,
+    "createdAte": 1666605141285
+  }
+]

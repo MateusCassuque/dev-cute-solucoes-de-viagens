@@ -32,7 +32,10 @@ router.post('/', async (req, res) => {
         }
         const novoSubservico = new Subservico(subservico)
 
-        res.status(200).render('subservico/create', {subservico})
+        res.status(200).render('layout/home', {
+            conteudo: 'subservico/create',
+            subservico
+        })
 
     } catch (error) {
         res.status(400).send({Erro: 'Erro criar o sub-Serviço: ' + error})
@@ -42,7 +45,10 @@ router.post('/', async (req, res) => {
 router.get('/create', async (req, res) => {
     try{
         const subservico = null
-        res.status(200).render('subservico/create', { subservico })
+        res.status(200).render('layout/home', {
+            conteudo: 'subservico/create',
+            subservico
+        })
     }catch(err){
         res.status(400).send({
             Erro: 'Erro ao buscar o serviço pelo Id.'
@@ -62,7 +68,11 @@ router.get('/show/:serviceId', async (req, res) => {
             res.status(404).send({Erro: 'Service no Found!'})
         }
 
-        res.status(200).render('subservico/show', { subServico })
+        res.status(200).render('layout/home', {
+            conteudo: 'subservico/show',
+            subServico
+        })
+
     }catch(err){
         res.status(400).send({
             Erro: 'Erro ao buscar o serviço pelo Id.'
@@ -84,7 +94,10 @@ router.get('/:serviceId', async (req, res) => {
 
         var clientNovo = null
 
-        res.status(200).render('subservico', { subServico, clientNovo })
+        res.status(200).render('layout/home', { 
+            conteudo: 'subservico/index',    
+            subServico, clientNovo 
+        })
     }catch(err){
         res.status(400).send({
             Erro: 'Erro ao buscar o serviço pelo Id.'

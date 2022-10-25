@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,9 +13,6 @@
 
     <!--link para O javaScript bootstrap da pagina-->
     <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!--Logo no Titúlo-->
-    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
     
   </head>
 <body>
@@ -48,19 +45,11 @@
     </nav>
     
     <p id="separador"></p>
-    
-    <div id="slidTitulo">
-        <h2>
-            <b> Dev-Cute </b> <br><small><b>Soluções de Viagens</b></small> 
-            <div class="mask">
-                <strong data-show>A Solução para o teu negócio. </strong>
-                <strong>Dá um nivel a Mais no que você faz!</strong>
-                <strong>O Futuro chegou mais cedo!</strong>
-                <strong>Só acerta quem tenta!</strong>
-            </div>
-        </h2> 
-    </div>
-    
+
+    <main>
+        <%- include(`../pages/${conteudo}`)%>
+    </main>
+
     <script src="/assets/dist/jquery/dist/jquery.min.js"></script>
 </body>
 </html>

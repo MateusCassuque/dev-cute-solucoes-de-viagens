@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,9 +13,6 @@
 
     <!--link para O javaScript bootstrap da pagina-->
     <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!--Logo no Titúlo-->
-    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
     
   </head>
 <body>
@@ -50,6 +47,10 @@
   </nav>
 
   <p id="separador"></p>
+
+  <main>
+    <%- include(`../pages/${conteudo}`)%>
+  </main>
   
 
   <script src="/assets/dist/jquery/dist/jquery.min.js"></script>

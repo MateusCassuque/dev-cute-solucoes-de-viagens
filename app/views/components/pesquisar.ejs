@@ -1,0 +1,68 @@
+<form action="/auth/buscar/" id="busrcarForm">
+    <div class="mb-3 form-group">
+        <label for="tipo" class="form-label"> Filtrar Por: </label>
+        <select id="tipo" name="tipo" class="form-select">
+            <option value="Serviço">Serviço</option>
+            <option value="Sub-Serviço">Sub-Serviço</option>
+            <option value="Processo">Processo</option>
+            <option value="Sub-Processo">Sub-Processo</option>
+        </select>
+    </div>
+
+    <div class="form-group d-flex">
+        <input class="form-control me-2" type="search" name="search" id="search" placeholder="Pesquisar Nome" aria-label="Search">
+        <button class="btn btn-outline-primary" type="submit">Pesquisar</button>
+    </div>
+</form>
+
+<span class="m-2">
+    Buscando Por: &nbsp;  
+    <strong><%= result.name%></strong>
+</span>
+<a href="/auth/dashboard/" class="nav-link"> Voltar </a>
+
+<table class=" table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">name</th>
+            <th scope="col">#</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acção</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if(result.list) { %>
+            
+            <% result.list.forEach(s => { %>
+                <tr>
+                    <th scope="row"><%=s.id %></th>
+                    <% if(s.client){ %>
+                        <td><%=s.client.name %> <%=s.client.apelido %></td>
+                        <td><%=s.servico.name %></td>
+                    <% }else{ %>
+                        <td><%=s.name %></td>
+                        <td><%=s.preco %></td>
+                    <% } %>
+                    <td><%=s.estado %></td>
+                    
+                    
+                    <td>
+                        <% if(s.servico) { %>
+                            <% if(s.servico.microServicos){ %>
+                                <a href="/processo/show/<%=s.id %>" class="btn btn-primary">Ver</a>
+                            <% } else{ %>
+                                <a href="/processo/sub/show/<%=s.id %>" class="btn btn-primary">Ver</a>
+                            <% } %>
+                        <% } %>
+                    </td>
+                </tr>
+            <% })%>
+    </tbody>
+    
+    <div class="card-header m-4">
+        Total encontrado: <strong id="total" class=" h2"> <%=result.list.length%> </strong>
+    </div>
+    
+    <% }%>
+</table>
