@@ -38,7 +38,7 @@ router.post('/:servicoId', async (req, res) => {
         
         console.log(client, servico)
 
-        try {
+        /* try {
             mailer.sendMail({
                 to: 'mateusAbril7@gmail.com',
                 from: 'mateusAbril2@gmail.com',
@@ -48,7 +48,7 @@ router.post('/:servicoId', async (req, res) => {
             
         } catch (error) {
             
-        } 
+        } */
 
         res.status(200).render('layout/home', {
             conteudo: 'service/index',
