@@ -39,7 +39,7 @@ app.use(morgan("dev"))
 
 require('./app/routes/index')(app)
 
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 3003
 
 app.listen(port, (()=>{
   console.log('SERVIDOR RONDANDO')
